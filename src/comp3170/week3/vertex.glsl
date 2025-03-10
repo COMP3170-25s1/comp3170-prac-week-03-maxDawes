@@ -3,6 +3,8 @@
 in vec4 a_position;	// vertex position as a homogenous vector in NDC 
 in vec3 a_colour; // vertex colour RGB
 
+uniform mat4 transform;
+
 out vec3 v_colour; // to fragment shader
 
 void main() {

@@ -28,6 +28,8 @@ public class Scene {
 	private int indexBuffer;
 	private Vector3f[] colours;
 	private int colourBuffer;
+	
+	Matrix4f m;
 
 	private Shader shader;
 
@@ -77,6 +79,8 @@ public class Scene {
 			// @formatter:on
 
 		indexBuffer = GLBuffers.createIndexBuffer(indices);
+		
+		m = new Matrix4f();
 
 	}
 
@@ -86,6 +90,7 @@ public class Scene {
 		// set the attributes
 		shader.setAttribute("a_position", vertexBuffer);
 		shader.setAttribute("a_colour", colourBuffer);
+		shader.setUniform("transform", translationMatrix(1,1, m));
 
 		// draw using index buffer
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
@@ -135,7 +140,7 @@ public class Scene {
 	public static Matrix4f rotationMatrix(float angle, Matrix4f dest) {
 
 		// TODO: Your code here
-
+		
 		return dest;
 	}
 
@@ -152,6 +157,12 @@ public class Scene {
 	public static Matrix4f scaleMatrix(float sx, float sy, Matrix4f dest) {
 
 		// TODO: Your code here
+		
+		dest.identity();
+		
+		dest.m00(sx);
+		dest.m11(sy);
+		
 
 		return dest;
 	}
